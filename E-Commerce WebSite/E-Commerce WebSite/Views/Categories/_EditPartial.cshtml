@@ -1,0 +1,117 @@
+﻿@model E_Commerce_WebSite.ViewModels.CategoryEditModel
+
+<input type="hidden" name="sever-task" id="server-task" value="@ViewBag.Act"/>
+<div class="form-group row mb-1">
+    @Html.LabelFor(x => x.Name, new { @class = "col-form-label col-form-label-sm col-2" })
+    <div class="col-6">
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control form-control-sm" })
+        @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger", style = "font-size:x-small" })
+    </div>
+</div>
+<div class="form-group row mb-1">
+    @Html.LabelFor(x => x.Description, new { @class = "col-form-label col-form-label-sm col-2" })
+    <div class="col-6">
+        @Html.TextBoxFor(x => x.Description, new { @class = "form-control form-control-sm" })
+        @Html.ValidationMessageFor(x => x.Description, "", new { @class = "text-danger", style = "font-size:x-small" })
+    </div>
+</div>
+
+<div class="form-group row mb-1">
+    @Html.LabelFor(x => x.Quantity, new { @class = "col-form-label col-form-label-sm col-2" })
+    <div class="col-6">
+        @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control form-control-sm" })
+        @Html.ValidationMessageFor(x => x.Quantity, "", new { @class = "text-danger", style = "font-size:x-small" })
+    </div>
+</div>
+<div class="form-group row mb-1">
+    @Html.LabelFor(x => x.AveragePrice, new { @class = "col-form-label col-form-label-sm col-2" })
+    <div class="col-6">
+        @Html.TextBoxFor(x => x.AveragePrice, new { @class = "form-control form-control-sm" })
+        @Html.ValidationMessageFor(x => x.AveragePrice, "", new { @class = "text-danger", style = "font-size:x-small" })
+    </div>
+</div>
+<div class="form-group row mb-1">
+    @Html.LabelFor(x => x.TopSellingProduct, new { @class = "col-form-label col-form-label-sm col-2" })
+    <div class="col-6">
+        @Html.TextBoxFor(x => x.TopSellingProduct, new { @class = "form-control form-control-sm" })
+        @Html.ValidationMessageFor(x => x.TopSellingProduct, "", new { @class = "text-danger", style = "font-size:x-small" })
+    </div>
+</div>
+<div class="form-group row mb-1">
+    @Html.LabelFor(x => x.FeaturedDate, new { @class = "col-form-label col-form-label-sm col-2" })
+    <div class="col-6">
+        @Html.TextBoxFor(x => x.FeaturedDate, new { @class = "form-control form-control-sm fd" })
+        @Html.ValidationMessageFor(x => x.FeaturedDate, "", new { @class = "text-danger", style = "font-size:x-small" })
+    </div>
+</div>
+<div class="form-group row mb-1">
+    @Html.LabelFor(x => x.Picture, new { @class = "col-form-label col-2 py-2" })
+    <div class="col-6 py-2">
+        @Html.TextBoxFor(x => x.Picture, new { @class = "form-control form-control-sm", type = "file" })
+        @Html.ValidationMessageFor(x => x.Picture, "", new { @class = "text-danger", style = "font-size:small" })
+    </div>
+    <div class="col-2 py-0">
+        <img src="~/Content/img/@ViewBag.CurrentPic" class="img-thumbnail" id="preview" style="width:40px;height:33px; margin-top:10px; margin-left:10px;" />
+    </div>
+</div>
+<div class="form-group row mb-1">
+
+    <div class="col-6 offset-2">
+        <div class="form-check">
+            @Html.CheckBoxFor(x => x.IsActive, new { @class = "form-check-input" })
+            <label class="form-check-label" for="flexCheckDefault">
+                Is the Category Available?
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="col-12">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product Image</th>
+                <th>Brand</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>
+                    <button type="submit" class="btn btn-secondary btn-sm" name="act" value="add" formnovalidate><i class="bi bi-plus"></i></button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Products.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.TextBoxFor(x => Model.Products[i].Image, new { @class = "form-control", type = "file" })
+                        @Html.ValidationMessageFor(x => Model.Products[i].Image, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => Model.Products[i].Brand, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => Model.Products[i].Brand, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => Model.Products[i].ProductName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => Model.Products[i].ProductName, "", new { @class = "text-danger" })
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => Model.Products[i].Price, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => Model.Products[i].Price, "", new { @class = "text-danger" })
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => Model.Products[i].Rating, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => Model.Products[i].Rating, "", new { @class = "text-danger" })
+
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-secondary btn-sm" name="act" value="remove_@i" formnovalidate><i class="bi bi-trash"></i></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
